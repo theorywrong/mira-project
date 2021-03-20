@@ -205,10 +205,6 @@ extern "C" void loader_entry(uint64_t p_Rdi, uint64_t p_Rsi)
 
         stub_debug_log("Iterate over '.' ...\n");
 
-        int ret_open_point = stub_open(".", 0x200000, 0);
-        snprintf(data, 100, "open(., o_directory): %d \n", ret_open_point);
-        stub_debug_log(data);
-
         IterateDirectory(".", nullptr, [](void* p_Args, const char* p_BasePath, char* p_Name, int32_t p_Type)
         {
             stub_debug_log("'.': OK.\n");

@@ -53,6 +53,7 @@ namespace Mira
             enum { Dbg_BufferSize = PAGE_SIZE };
 
             Utils::Hook* m_TrapFatalHook;
+            Utils::Hook* m_PrivCheckHook;
 
             struct mtx m_Mutex;
             uint8_t m_Buffer[Dbg_BufferSize];
@@ -73,6 +74,8 @@ namespace Mira
 
         protected:
             static void OnTrapFatal(struct trapframe* p_Frame, vm_offset_t p_Eva);
+            static int OnPrivCheck(struct thread* p_Td, int p_Priv);
+
             static bool IsStackSpace(void* p_Address);
 
             int32_t ReadProcessMemory(struct proc* p_Process, void* p_Address, uint8_t* p_Data, uint32_t p_DataLength);

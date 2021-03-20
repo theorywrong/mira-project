@@ -209,3 +209,21 @@ typedef struct _MiraWriteProcessMemory
     // Data to write
     uint8_t Data[];
 } MiraWriteProcessMemory;
+
+typedef struct _MiraGetJmpslotAddress
+{
+    // -1 for calling process
+    int32_t ProcessId;
+
+    // Name of the function searched
+    char Name[_MAX_PATH];
+
+    // Name of the module that containt this function
+    char ModuleName[_MAX_PATH];
+
+    // If the name given is directly a nids or not
+    int32_t IsNids;
+
+    // The address of where we need to stock the return
+    void** ReturnAddress;
+} MiraGetJmpslotAddress;

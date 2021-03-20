@@ -135,9 +135,9 @@ int TrainerManager::OnSvFixup(register_t** stack_base, struct image_params* imgp
             break;
         }
 
-        //WriteLog(LL_Debug, "execPath: (%s), execPath2: (%s).", imgp->execpath, imgp->execpath2);
+        WriteLog(LL_Debug, "execPath: (%s), execPath2: (%s).", imgp->execpath, imgp->execpath2);
 
-        //WriteLog(LL_Debug, "TrainerManager, Pid: (%d).", s_Process->p_pid);
+        WriteLog(LL_Debug, "TrainerManager, Pid: (%d).", s_Process->p_pid);
 
         auto s_TrainerManager = Mira::Framework::GetFramework()->GetTrainerManager();
         if (s_TrainerManager == nullptr)

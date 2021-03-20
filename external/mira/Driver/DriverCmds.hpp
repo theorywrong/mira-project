@@ -40,6 +40,7 @@ enum MiraIoctlCmds
     CMD_ReadProcessMemory,          // Read process memory
     CMD_WriteProcessMemory,         // Write process memory
     CMD_ThreadCredentials,          // Get/Set thread credentials
+    CMD_GetJmpslotAddress,          // Got the jumpslot address of a function
     CMD_DEBUGGER_END = 60,
 
     // 61-90 = Mira Reserved
@@ -82,6 +83,9 @@ enum MiraIoctlCmds
 // Read/Write process memory
 #define MIRA_READ_PROCESS_MEMORY _IOC(IOC_INOUT, MIRA_IOCTL_BASE, (uint32_t)(MiraIoctlCmds::CMD_ReadProcessMemory), sizeof(MiraReadProcessMemory))
 #define MIRA_WRITE_PROCESS_MEMORY _IOC(IOC_INOUT, MIRA_IOCTL_BASE, (uint32_t)(MiraIoctlCmds::CMD_WriteProcessMemory), sizeof(MiraWriteProcessMemory))
+
+// Get Jmpslot address
+#define MIRA_GET_JMPSLOT_ADDR _IOC(IOC_INOUT, MIRA_IOCTL_BASE, (uint32_t)(MiraIoctlCmds::CMD_GetJmpslotAddress), sizeof(MiraGetJmpslotAddress))
 
 // Configuration
 #define MIRA_GET_CONFIG _IOC(IOC_IN, MIRA_IOCTL_BASE, (uint32_t)(MiraIoctlCmds::CMD_GetConfig), 0)

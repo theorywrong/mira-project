@@ -42,6 +42,16 @@ bool Debugger::OnLoad()
         WriteLog(LL_Info, "enabling trap_fatal hook");
         m_TrapFatalHook->Enable();
     }
+
+    // Create the trap fatal hook
+    WriteLog(LL_Info, "creating priv_check hook");
+    m_PrivCheckHook = new Utils::Hook(kdlsym(priv_check), reinterpret_cast<void*>(OnPrivCheck));
+    
+    if (m_PrivCheckHook != nullptr)
+    {
+        WriteLog(LL_Info, "enabling priv_check hook");
+        m_PrivCheckHook->Enable();
+    }
 #endif
     return true;
 }
@@ -57,6 +67,16 @@ bool Debugger::OnUnload()
         
         delete m_TrapFatalHook;
         m_TrapFatalHook = nullptr;
+    }
+
+    WriteLog(LL_Info, "deleting priv_check hook");
+    if (m_PrivCheckHook != nullptr)
+    {
+        if (m_PrivCheckHook->IsEnabled())
+            m_PrivCheckHook->Disable();
+        
+        delete m_PrivCheckHook;
+        m_PrivCheckHook = nullptr;
     }
 #endif
 
