@@ -12,6 +12,7 @@
 #include <OrbisOS/Utilities.hpp>
 
 #include <Plugins/PluginManager.hpp>
+#include <Plugins/PrivCheck/PrivCheckPlugin.hpp>
 #include <Plugins/Debugging/Debugger.hpp>
 
 #include <Trainers/TrainerManager.hpp>
@@ -192,23 +193,7 @@ int32_t CtrlDriver::OnIoctl(struct cdev* p_Device, u_long p_Command, caddr_t p_D
             {
                 case MIRA_READ_PROCESS_MEMORY:
                 case MIRA_WRITE_PROCESS_MEMORY:
-                {
-                    auto s_PluginManager = s_Framework->GetPluginManager();
-                    if (s_PluginManager == nullptr)
-                    {
-                        WriteLog(LL_Error, "could not get plugin manager.");
-                        return ENOMEM;
-                    }
-
-                    auto s_Debugger = static_cast<Mira::Plugins::Debugger*>(s_PluginManager->GetDebugger());
-                    if (s_Debugger == nullptr)
-                    {
-                        WriteLog(LL_Error, "could not get debugger.");
-                        return ENOMEM;
-                    }
-
-                    return s_Debugger->OnIoctl(p_Device, p_Command, p_Data, p_FFlag, p_Thread);
-                }
+                    return Mira::Plugins::Debugger::OnIoctl(p_Device, p_Command, p_Data, p_FFlag, p_Thread);
                 // Get the requested process information
                 case MIRA_GET_PROC_INFORMATION:
                     return OnMiraGetProcInformation(p_Device, p_Command, p_Data, p_FFlag, p_Thread);
@@ -262,6 +247,8 @@ int32_t CtrlDriver::OnIoctl(struct cdev* p_Device, u_long p_Command, caddr_t p_D
                     return OnMiraGetConfig(p_Device, p_Command, p_Data, p_FFlag, p_Thread);
                 case MIRA_SET_CONFIG:
                     return OnMiraSetConfig(p_Device, p_Command, p_Data, p_FFlag, p_Thread);
+                case MIRA_PRIV_CHECK:             
+                    return Plugins::PrivCheckPlugin::OnIoctl(p_Device, p_Command, p_Data, p_FFlag, p_Thread);
                 default:
                     WriteLog(LL_Debug, "mira base unknown command: (0x%llx).", p_Command);
                     break;

@@ -37,12 +37,14 @@ namespace Mira
             Mira::Utils::IModule* m_FakePkgManager;
             Mira::Utils::IModule* m_EmuRegistry;
             Mira::Utils::IModule* m_SyscallGuard;
+            Mira::Utils::IModule* m_PrivCheck;
 
         public:
             Mira::Utils::IModule* GetDebugger() { return m_Debugger; }
             Mira::Utils::IModule* GetFakeSelfManager() { return m_FakeSelfManager; }
             Mira::Utils::IModule* GetEmulatedRegistry() { return m_EmuRegistry; }
             Mira::Utils::IModule* GetSyscallGuard() { return m_SyscallGuard; }
+            Mira::Utils::IModule* GetPrivCheck() { return m_PrivCheck; }
         };
     }
 }

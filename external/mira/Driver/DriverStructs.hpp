@@ -227,3 +227,14 @@ typedef struct _MiraGetJmpslotAddress
     // The address of where we need to stock the return
     void** ReturnAddress;
 } MiraGetJmpslotAddress;
+
+typedef struct _MiraPrivCheck
+{
+    // Get or set the mask?
+    int32_t ProcessId;
+
+    uint32_t IsGet;
+
+    // Override mask
+    uint8_t Mask[128]; // This must match MaskSizeInBytes in PrivCheckPlugin.hpp
+} MiraPrivCheck;
