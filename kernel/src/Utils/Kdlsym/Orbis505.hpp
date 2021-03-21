@@ -181,6 +181,7 @@ for the platforms that do enable kernel ASLR (Address Space Layout Randomization
 #define kdlsym_addr_vm_fault_disable_pagefaults            0x002A6C20
 #define kdlsym_addr_vm_fault_enable_pagefaults             0x002A6C50
 #define kdlsym_addr_vm_map_lookup_entry                    0x0019F760
+#define kdlsym_addr__vm_map_protect                        0x001A3A50
 #define kdlsym_addr_vmspace_acquire_ref                    0x0019EF90
 #define kdlsym_addr_vmspace_alloc                          0x0019EB20
 #define kdlsym_addr_vmspace_free                           0x0019EDC0

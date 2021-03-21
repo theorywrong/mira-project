@@ -15,6 +15,8 @@
 #include <Plugins/PrivCheck/PrivCheckPlugin.hpp>
 #include <Plugins/Debugging/Debugger.hpp>
 
+#include <Driver/System/SystemDriverCtl.hpp>
+
 #include <Mira.hpp>
 
 extern "C"

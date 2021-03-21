@@ -201,8 +201,6 @@ extern "C" void loader_entry(uint64_t p_Rdi, uint64_t p_Rsi)
         stub_dlsym(s_LibcModuleId, "strlen", &strlen);
         stub_dlsym(s_LibcModuleId, "strcmp", &strcmp);
 
-        char data[100];
-
         stub_debug_log("Iterate over '.' ...\n");
 
         IterateDirectory(".", nullptr, [](void* p_Args, const char* p_BasePath, char* p_Name, int32_t p_Type)
