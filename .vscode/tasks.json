@@ -50,15 +50,15 @@
             }
         },
         {
-            "label": "Build debugger",
+            "label": "Build mira_module",
             "type": "shell",
-            "command": "make clean;make create;MIRA_CHECKS=$checks make",
+            "command": "MIRA_PLATFORM=$platform make clean;MIRA_PLATFORM=$platform make create;MIRA_PLATFORM=$platform MIRA_CHECKS=$checks make",
             "group": "build",
             "problemMatcher": [
                 "$gcc"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/debugger"
+                "cwd": "${workspaceFolder}/mira_module"
             }
         },
         {
@@ -86,28 +86,17 @@
             }
         },
         {
-            "label": "Build Maneja (PC)",
+            "label": "Build Everything",
             "type": "shell",
-            "command": "make pc",
+            "command": "echo Build Everything",
             "group": "build",
             "problemMatcher": [
                 "$gcc"
             ],
-            "options": {
-                "cwd": "${workspaceFolder}/maneja"
-            }
-        },
-        {
-            "label": "Build Maneja (PS4)",
-            "type": "shell",
-            "command": "make ps4",
-            "group": "build",
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/maneja"
-            }
+            "dependsOn": [
+                "Build Mira",
+                "Build mira_module"
+            ]
         }
     ]
 }

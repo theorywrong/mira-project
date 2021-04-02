@@ -187,8 +187,16 @@ PrivCheckPlugin::ProcPriv* PrivCheckPlugin::GetOrCreatePrivByProcessId(int32_t p
 int PrivCheckPlugin::PrivCheckHook(struct thread* td, int priv)
 {
     PrivCheckPlugin* s_PrivCheckPlugin = nullptr;
+    if (!td) {
+        WriteLog(LL_Error, "thread not found ?!");
+        return 1;
+    }
+
     do
     {
+        if (!td->td_proc)
+            break;
+
         auto s_Framaework = Mira::Framework::GetFramework();
         if (s_Framaework == nullptr)
             break;
@@ -196,15 +204,15 @@ int PrivCheckPlugin::PrivCheckHook(struct thread* td, int priv)
         auto s_PluginManager = s_Framaework->GetPluginManager();
         if (s_PluginManager == nullptr)
             break;
-        
+
         s_PrivCheckPlugin = reinterpret_cast<PrivCheckPlugin*>(s_PluginManager->GetPrivCheck());
         if (s_PrivCheckPlugin == nullptr)
             break;
+
         
         auto s_Priv = s_PrivCheckPlugin->FindPrivByProcessId(td->td_proc->p_pid);
         if (s_Priv == nullptr)
             break;
-
 
         const uint8_t* s_Mask = s_Priv->Mask;
         // Calculate where in the mask we need to check
@@ -245,8 +253,17 @@ int PrivCheckPlugin::PrivCheckHook(struct thread* td, int priv)
 int PrivCheckPlugin::PrivCheckCredHook(struct thread* td, int priv)
 {
     PrivCheckPlugin* s_PrivCheckPlugin = nullptr;
+
+    if (!td) {
+        WriteLog(LL_Error, "thread not found ?!");
+        return 0;
+    }
+
     do
     {
+        if (!td->td_proc)
+            break;
+
         auto s_Framaework = Mira::Framework::GetFramework();
         if (s_Framaework == nullptr)
             break;
