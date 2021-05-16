@@ -6,7 +6,8 @@
                 "${workspaceFolder}/kernel/**",
                 "${workspaceFolder}/kernel/src",
                 "${workspaceFolder}/external/freebsd-headers/include",
-                "${workspaceFolder}/external"
+                "${workspaceFolder}/external",
+                "${workspaceFolder}/external/mira/Kernel"
             ],
             "defines": [
                 "_KERNEL",
@@ -29,9 +30,9 @@
         {
             "name": "MiraLoader",
             "includePath": [
-                "${workspaceFolder}/kernel/**",
                 "${workspaceFolder}/loader",
-                "${workspaceFolder}/external/freebsd-headers/include"
+                "${workspaceFolder}/external/freebsd-headers/include",
+                "${workspaceFolder}/external/mira/**"
             ],
             "defines": [
                 "_KERNEL",
@@ -125,6 +126,25 @@
             "name": "mira_module",
             "includePath": [
                 "${workspaceFolder}/mira_module/src",
+                "${env:OO_PS4_TOOLCHAIN}/include",
+                "${env:OO_PS4_TOOLCHAIN}/include/c++/v1",
+                "${workspaceFolder}/external"
+            ],
+            "defines": [
+                "_DEBUG",
+                "PS4",
+                "__FreeBSD__",
+                "__BSD_VISIBLE"
+            ],
+            "compilerPath": "/usr/bin/clang++",
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "clang-x64"
+        },
+        {
+            "name": "tests",
+            "includePath": [
+                "${workspaceFolder}/tests/src",
                 "${env:OO_PS4_TOOLCHAIN}/include",
                 "${env:OO_PS4_TOOLCHAIN}/include/c++/v1",
                 "${workspaceFolder}/external"

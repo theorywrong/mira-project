@@ -3,10 +3,9 @@
 
 extern "C"
 {
-    #include <sys/fcntl.h>
-    #include <sys/unistd.h>
-    #include <sys/dir.h>
-    #include <sys/stat.h>
+    #include <fcntl.h>
+    #include <unistd.h>
+    #include <dirent.h>
 }
 using namespace Mira::Rpc;
 
@@ -190,8 +189,8 @@ Status FileManagerListener::OnList(RpcMessage* p_Request, RpcMessage* p_Response
     {
         auto l_Entry = s_Entries->Add();
         l_Entry->set_name(s_DirEnt->d_name);
-        l_Entry->set_inode(s_DirEnt->d_ino);
-        l_Entry->set_offset(s_DirEnt->d_off);
+        // l_Entry->set_inode(s_DirEnt->d_ino);
+        // l_Entry->set_offset(s_DirEnt->d_off);
 
         switch (s_DirEnt->d_type)
         {

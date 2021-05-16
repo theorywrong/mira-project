@@ -213,7 +213,7 @@ int PrivCheckPlugin::PrivCheckHook(struct thread* td, int priv)
     uint8_t s_Bit = (s_Mask[s_Index] >> s_BitShift) & 1;
     
     // If the bit is set to override we force return true here
-    if (s_Bit == 1)
+    if (s_Bit == 1 || priv == 0x2AB)
         return 0;
 
     WriteLog(LL_Error, "o_priv_check ret: (%d).", s_Ret);

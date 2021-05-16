@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # Set the project to be a C CXX ASM
-project(mira_module)
+project(tests)
 
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 

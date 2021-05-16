@@ -18,10 +18,7 @@ Daemon::Daemon() :
     m_FtpServer(nullptr),
     m_RpcManager(nullptr)
 {
-#if defined(PS4)
-    // Initialize the networking
-    sceNetInit();
-#endif
+
 }
 
 Daemon::~Daemon()
